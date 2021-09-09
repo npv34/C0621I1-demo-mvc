@@ -10,7 +10,10 @@
         <td><?php echo $key + 1 ?></td>
         <td><?php echo $user['name']?></td>
         <td><?php echo $user['email']?></td>
-        <td><a  class="btn btn-danger" href="index.php?router=users&action=delete&id=<?php echo $user['id'] ?>">Delete</a></td>
+        <td>
+            <a  class="btn btn-danger" href="index.php?router=users&action=delete&id=<?php echo $user['id'] ?>">Delete</a>
+            <a  class="btn btn-primary" href="index.php?router=users&action=edit&id=<?php echo $user['id'] ?>">Edit</a>
+        </td>
     </tr>
 
     <?php endforeach; ?>

@@ -38,4 +38,31 @@ class User
         $stmt->bindParam(1, $id);
         $stmt->execute();
     }
+
+    function create($name, $email, $password) {
+        $sql = "INSERT INTO users(name,email,password) VALUES (?,?,?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $name);
+        $stmt->bindParam(2, $email);
+        $stmt->bindParam(3, $password);
+        $stmt->execute();
+    }
+
+    function find($id) {
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+    }
+
+    function update($name, $id) {
+        $sql = "UPDATE users SET name = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $name);
+        $stmt->bindParam(2, $id);
+        $stmt->execute();
+    }
 }

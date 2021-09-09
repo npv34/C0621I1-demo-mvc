@@ -23,7 +23,11 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require_once "views/users/add.php";
         } else {
-
+            $name = $_REQUEST['name'];
+            $email = $_REQUEST['email'];
+            $password = $_REQUEST['password'];
+            $this->userModel->create($name, $email, $password);
+            header('location: index.php?router=users&action=show-list');
         }
     }
 
@@ -32,5 +36,19 @@ class UserController
         $this->userModel->destroy($id);
         //  quay tro lai page danh sach
         header('location: index.php?router=users&action=show-list');
+    }
+
+    function edit($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            // goi xuong model
+            $user = $this->userModel->find($id);
+            // tra ve view
+            require_once "views/users/edit.php";
+        } else {
+            $name = $_REQUEST['name'];
+            $this->userModel->update($name, $id);
+            header('location: index.php?router=users&action=show-list');
+
+        }
     }
 }
